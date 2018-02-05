@@ -2,10 +2,10 @@
 	<head >
 		<title>Ajax test call</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	    <script type="text/javascript" src="js/jquery.min.js" ></script>
-	    <script type="text/javascript" src="js/jquery.class.min.js" ></script>
-	    <script type="text/javascript" src="js/md5-min.js" ></script>
-	    <script type="text/javascript" src="js/digest-auth.js" ></script>
+	    <script type="text/javascript" src="jquery.min.js" ></script>
+	    <script type="text/javascript" src="jquery.class.min.js" ></script>
+	    <script type="text/javascript" src="md5-min.js" ></script>
+	    <script type="text/javascript" src="digest-auth.js" ></script>
 	    
 	    <script type="text/javascript">
 	   		var digestAuth = new pl.arrowgroup.DigestAuthentication(
@@ -21,7 +21,7 @@
 	   		);
 	   		function callREST(){
 	   			digestAuth.setCredentials($('#user').val(),$('#password').val());
-	   			digestAuth.call('http://localhost:8280/digest');
+	   			digestAuth.call('http://localhost:8080/digest');
 	   		}
 	    </script>
 	</head>

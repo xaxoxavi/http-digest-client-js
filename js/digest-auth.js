@@ -37,19 +37,26 @@ $.Class("pl.arrowgroup.DigestAuthentication", {
 		$.ajax({
 		        url: uri,
 		        type: this.HTTP_METHOD,
-			    contentType: 'text/plain',
+				contentType: 'text/plain',
 		        beforeSend: function(request){
 		        	if(typeof authorizationHeader != 'undefined'){
 		        		request.setRequestHeader(digestAuth.AUTHORIZATION_HEADER, authorizationHeader); 		        		
 		        	}
-		        	request.setRequestHeader('Access-Control-Allow-Origin', '*');
-		        },
+		        	//request.setRequestHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
+				},
+				xhrFields: {
+                    withCredentials: true
+                },
+				crossDomain: true,
 		        success: function(response) {
 		        	digestAuth.settings.onSuccess(response);		        	
 		        },
 		        complete: function(response) {
 		        	if(digestAuth.attempts == digestAuth.MAX_ATTEMPTS){
-			    		digestAuth.settings.onFailure(response);
+						if (response.status != 200){
+							digestAuth.settings.onFailure(response);
+						}
+			    		
 			    		return;
 			    	}
 		        	var paramParser = new pl.arrowgroup.HeaderParamsParser(response.getResponseHeader(digestAuth.WWW_AUTHENTICATE_HEADER));
